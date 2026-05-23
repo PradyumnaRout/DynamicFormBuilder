@@ -12,7 +12,11 @@ struct RegexValidator: FieldValidator {
     func validate(_ value: FieldValue) -> ValidationResult {
         guard let text = value.stringValue, !text.isEmpty else { return .valid }
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return .valid }
-        let range = NSRange(text.startIndex..., in: text)
-        return regex.firstMatch(in: text, range: range) != nil ? .valid : .invalid(errorMessage)
+        let fullRange = NSRange(text.startIndex..., in: text)
+        guard let match = regex.firstMatch(in: text, range: fullRange) else {
+            return .invalid(errorMessage)
+        }
+        // The match must span the entire string — partial matches are rejected.
+        return match.range == fullRange ? .valid : .invalid(errorMessage)
     }
 }

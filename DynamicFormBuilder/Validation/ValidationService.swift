@@ -4,11 +4,12 @@ final class ValidationService {
 
     func validate(field: FormField, value: FieldValue) -> ValidationResult {
         switch field {
-        case .text(let m):      return validateText(model: m, value: value)
-        case .dropdown(let m):  return validateDropdown(model: m, value: value)
-        case .toggle:           return .valid
-        case .checkbox(let m):  return validateCheckbox(model: m, value: value)
-        case .unknown:          return .valid
+        case .text(let m):          return validateText(model: m, value: value)
+        case .dropdown(let m):      return validateDropdown(model: m, value: value)
+        case .toggle:               return .valid
+        case .checkbox(let m):      return validateCheckbox(model: m, value: value)
+        case .colorPicker(let m):   return validateColorPicker(model: m, value: value)
+        case .unknown:              return .valid
         }
     }
 
@@ -24,6 +25,9 @@ final class ValidationService {
         var validators: [FieldValidator] = []
         if model.required {
             validators.append(RequiredValidator(errorMessage: model.errorMessage ?? "This field is required."))
+        }
+        if model.subtype == .uri {
+            validators.append(URLValidator())
         }
         if let max = model.maxLength {
             validators.append(MaxLengthValidator(maxLength: max, errorMessage: model.errorMessage))
@@ -45,6 +49,11 @@ final class ValidationService {
             return checked ? .valid : .invalid(model.errorMessage ?? "This checkbox is required.")
         }
         return .invalid(model.errorMessage ?? "This checkbox is required.")
+    }
+
+    private func validateColorPicker(model: ColorPickerFieldModel, value: FieldValue) -> ValidationResult {
+        guard model.required else { return .valid }
+        return RequiredValidator(errorMessage: model.errorMessage ?? "Please select a color.").validate(value)
     }
 
     private func run(_ validators: [FieldValidator], on value: FieldValue) -> ValidationResult {

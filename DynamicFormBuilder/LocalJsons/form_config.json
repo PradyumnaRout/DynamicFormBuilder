@@ -19,6 +19,17 @@
       "required": true
     },
     {
+      "id": "campaign_venue",
+      "order": 1,
+      "type": "TEXT",
+      "subtype": "PLAIN",
+      "label": "Campaign venue",
+      "default_value": "",
+      "max_length": 20,
+      "error_message": "venue cannot exceed 20 characters.",
+      "required": false
+    },
+    {
       "id": "daily_budget",
       "order": 2,
       "type": "TEXT",
@@ -57,13 +68,24 @@
       "type": "DROPDOWN",
       "label": "Billing Account",
       "required": true,
-      "options": []
+      "options": [
+        { "id": "net_google", "label": "Google Search" },
+        { "id": "net_meta", "label": "Meta Platforms" },
+        { "id": "net_tiktok", "label": "TikTok" }
+      ]
     },
     {
       "id": "brand_color",
       "order": 6,
       "type": "COLOR_PICKER",
       "label": "Primary Brand Color",
+      "required": true
+    },
+    {
+      "id": "item_color",
+      "order": 6,
+      "type": "COLOR_PICKER",
+      "label": "Primary item Color",
       "required": true
     },
     {

@@ -169,6 +169,8 @@ final class FormViewModel: ObservableObject {
                 }
             case .toggle(let m):
                 fieldValues[m.id] = .bool(m.defaultValue)
+            case .colorPicker(let m):
+                fieldValues[m.id] = .string(m.defaultValue ?? "#FFFFFF")
             case .checkbox, .unknown:
                 break
             }

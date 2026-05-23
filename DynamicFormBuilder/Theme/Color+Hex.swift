@@ -1,6 +1,20 @@
 import SwiftUI
+import UIKit
 
 extension Color {
+    /// Converts a Color to its 6-digit uppercase hex string, e.g. "#FF5733".
+    func toHex() -> String {
+        let ui = UIColor(self)
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0
+        ui.getRed(&r, green: &g, blue: &b, alpha: nil)
+        return String(
+            format: "#%02X%02X%02X",
+            Int((r * 255).rounded()),
+            Int((g * 255).rounded()),
+            Int((b * 255).rounded())
+        )
+    }
+
     init(hex: String) {
         let cleaned = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0

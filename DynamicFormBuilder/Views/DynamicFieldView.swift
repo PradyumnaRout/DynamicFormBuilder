@@ -15,6 +15,8 @@ struct DynamicFieldView: View {
             DynamicToggleFieldView(model: model, viewModel: viewModel)
         case .checkbox(let model):
             DynamicCheckboxFieldView(model: model, viewModel: viewModel)
+        case .colorPicker(let model):
+            DynamicColorPickerFieldView(model: model, viewModel: viewModel)
         case .unknown:
             EmptyView()
         }
