@@ -9,6 +9,7 @@ struct FormConfig: Decodable {
         case fields
     }
 
+    // MARK: Ordering fiels using order id.
     var sortedKnownFields: [FormField] {
         fields.filter(\.isKnown).sorted { $0.order < $1.order }
     }

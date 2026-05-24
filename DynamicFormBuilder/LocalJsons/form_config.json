@@ -20,7 +20,7 @@
     },
     {
       "id": "campaign_venue",
-      "order": 1,
+      "order": 11,
       "type": "TEXT",
       "subtype": "PLAIN",
       "label": "Campaign venue",
@@ -82,13 +82,6 @@
       "required": true
     },
     {
-      "id": "item_color",
-      "order": 6,
-      "type": "COLOR_PICKER",
-      "label": "Primary item Color",
-      "required": true
-    },
-    {
       "id": "campaign_description",
       "order": 7,
       "type": "TEXT",
@@ -127,6 +120,13 @@
         "Privacy Policy": "https://example.com/privacy"
       },
       "clickable_text_color": "#BB86FC"
+    },
+    {
+      "id": "added Date",
+      "order": 6,
+      "type": "DATE_PICKER",
+      "label": "24th May, 2026",
+      "required": false
     }
   ]
 }
